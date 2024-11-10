@@ -8,4 +8,6 @@ public interface ProductDao {
     Product getProductById(Integer productId);
 
     Integer createProduct(ProductRequest productRequest);
+
+    Integer updateProduct(Integer productId, ProductRequest productRequest);
 }
