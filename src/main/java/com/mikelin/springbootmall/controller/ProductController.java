@@ -1,5 +1,6 @@
 package com.mikelin.springbootmall.controller;
 
+import com.mikelin.springbootmall.constant.ProductCategory;
 import com.mikelin.springbootmall.dto.ProductRequest;
 import com.mikelin.springbootmall.model.Product;
 import com.mikelin.springbootmall.service.ProductService;
@@ -18,9 +19,12 @@ public class ProductController {
     private ProductService productService;
 
     @GetMapping("/products")
-    public ResponseEntity<List<Product>> getProducts(){
+    public ResponseEntity<List<Product>> getProducts(
+            @RequestParam(required = false) ProductCategory category,
+            @RequestParam(required = false) String search
+    ){
 
-        List<Product> products = productService.getProducts();
+        List<Product> products = productService.getProducts(category, search);
 
         return  ResponseEntity.status(HttpStatus.OK).body(products);
     }
