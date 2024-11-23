@@ -1,6 +1,6 @@
 package com.mikelin.springbootmall.service;
 
-import com.mikelin.springbootmall.constant.ProductCategory;
+import com.mikelin.springbootmall.dto.ProductQueryParams;
 import com.mikelin.springbootmall.dto.ProductRequest;
 import com.mikelin.springbootmall.model.Product;
 
@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface ProductService {
 
-    List<Product> getProducts(ProductCategory category, String search);
+    List<Product> getProducts(ProductQueryParams productQueryParams);
 
     Product getProductById(Integer productId);
 

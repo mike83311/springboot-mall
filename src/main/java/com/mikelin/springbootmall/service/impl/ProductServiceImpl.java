@@ -1,7 +1,7 @@
 package com.mikelin.springbootmall.service.impl;
 
-import com.mikelin.springbootmall.constant.ProductCategory;
 import com.mikelin.springbootmall.dao.ProductDao;
+import com.mikelin.springbootmall.dto.ProductQueryParams;
 import com.mikelin.springbootmall.dto.ProductRequest;
 import com.mikelin.springbootmall.model.Product;
 import com.mikelin.springbootmall.service.ProductService;
@@ -17,8 +17,8 @@ public class ProductServiceImpl implements ProductService {
     private ProductDao productDao;
 
     @Override
-    public List<Product> getProducts(ProductCategory category, String search) {
-        return productDao.getProducts(category, search);
+    public List<Product> getProducts(ProductQueryParams productQueryParams) {
+        return productDao.getProducts(productQueryParams);
     }
 
     @Override

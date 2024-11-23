@@ -1,6 +1,7 @@
 package com.mikelin.springbootmall.controller;
 
 import com.mikelin.springbootmall.constant.ProductCategory;
+import com.mikelin.springbootmall.dto.ProductQueryParams;
 import com.mikelin.springbootmall.dto.ProductRequest;
 import com.mikelin.springbootmall.model.Product;
 import com.mikelin.springbootmall.service.ProductService;
@@ -24,7 +25,10 @@ public class ProductController {
             @RequestParam(required = false) String search
     ){
 
-        List<Product> products = productService.getProducts(category, search);
+        ProductQueryParams productQueryParams = new ProductQueryParams();
+        productQueryParams.setCategory(category);
+        productQueryParams.setSearch(search);
+        List<Product> products = productService.getProducts(productQueryParams);
 
         return  ResponseEntity.status(HttpStatus.OK).body(products);
     }
