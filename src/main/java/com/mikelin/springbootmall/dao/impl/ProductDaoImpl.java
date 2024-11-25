@@ -6,6 +6,7 @@ import com.mikelin.springbootmall.dto.ProductRequest;
 import com.mikelin.springbootmall.model.Product;
 import com.mikelin.springbootmall.rowmapper.ProductRowMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
@@ -127,5 +128,24 @@ public class ProductDaoImpl implements ProductDao {
 
         String sql = "DELETE FROM product WHERE product_id = :productId";
         namedParameterJdbcTemplate.update(sql, new MapSqlParameterSource("productId", productId));
+    }
+
+    @Override
+    public Integer countProduct(ProductQueryParams productQueryParams) {
+        String sql = "SELECT count(*) FROM product WHERE 1=1";
+
+        Map<String, Object> map = new HashMap<>();
+
+        // search
+        if (productQueryParams.getCategory() != null) {
+            sql += " AND category = :category";
+            map.put("category", productQueryParams.getCategory().name());
+        }
+
+        if (productQueryParams.getSearch() != null) {
+            sql += " AND product_name LIKE :search";
+            map.put("search", "%" + productQueryParams.getSearch() + "%");
+        }
+        return namedParameterJdbcTemplate.queryForObject(sql, map, Integer.class);
     }
 }
