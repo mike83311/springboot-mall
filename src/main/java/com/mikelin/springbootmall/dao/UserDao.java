@@ -8,4 +8,6 @@ public interface UserDao {
     public Integer createUser(UserRegisterRequest userRegisterRequest);
 
     public User getUserById(Integer id);
+
+    public User getUserByEmail(String email);
 }
