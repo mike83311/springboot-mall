@@ -4,6 +4,7 @@ import com.mikelin.springbootmall.dao.OrderDao;
 import com.mikelin.springbootmall.dao.ProductDao;
 import com.mikelin.springbootmall.dto.BuyItem;
 import com.mikelin.springbootmall.dto.CreateOrderRequest;
+import com.mikelin.springbootmall.model.Order;
 import com.mikelin.springbootmall.model.OrderItem;
 import com.mikelin.springbootmall.model.Product;
 import com.mikelin.springbootmall.service.OrderService;
@@ -49,5 +50,22 @@ public class OrderServiceImpl implements OrderService {
         orderDao.createOrderItems(orderId, orderItemList);
 
         return orderId;
+    }
+
+    @Override
+    public Order getOrderById(Integer orderId) {
+
+        Order order = orderDao.getOrderById(orderId);
+
+        List<OrderItem> orderItemList = orderDao.getOrderItemsByOrderId(orderId);
+
+        order.setOrderItemList(orderItemList);
+
+        return order;
+    }
+
+    @Override
+    public List<?> getAllOrders(Integer userId) {
+        return List.of();
     }
 }
