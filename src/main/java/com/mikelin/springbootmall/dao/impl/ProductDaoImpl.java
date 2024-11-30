@@ -3,6 +3,7 @@ package com.mikelin.springbootmall.dao.impl;
 import com.mikelin.springbootmall.dao.ProductDao;
 import com.mikelin.springbootmall.dto.ProductQueryParams;
 import com.mikelin.springbootmall.dto.ProductRequest;
+import com.mikelin.springbootmall.model.Order;
 import com.mikelin.springbootmall.model.Product;
 import com.mikelin.springbootmall.rowmapper.ProductRowMapper;
 import org.springframework.beans.factory.annotation.Autowired;

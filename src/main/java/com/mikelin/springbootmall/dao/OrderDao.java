@@ -1,6 +1,7 @@
 package com.mikelin.springbootmall.dao;
 
 import com.mikelin.springbootmall.dto.CreateOrderRequest;
+import com.mikelin.springbootmall.dto.OrderQueryParams;
 import com.mikelin.springbootmall.model.Order;
 import com.mikelin.springbootmall.model.OrderItem;
 
@@ -15,4 +16,8 @@ public interface OrderDao {
     Order getOrderById(Integer orderId);
 
     List<OrderItem> getOrderItemsByOrderId(Integer orderId);
+
+    List<Order> getOrders(OrderQueryParams orderQueryParams);
+
+    Integer countOrder(OrderQueryParams orderQueryParams);
 }
