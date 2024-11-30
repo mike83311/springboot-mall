@@ -27,12 +27,4 @@ public class OrderController {
 
         return ResponseEntity.status(HttpStatus.CREATED).body(order);
     }
-
-    @GetMapping("/users/{userId}/orders")
-    public ResponseEntity<?> getAllOrders(@PathVariable Integer userId) {
-
-        List<?> orderList = orderService.getAllOrders(userId);
-
-        return ResponseEntity.status(HttpStatus.OK).body(orderList);
-    }
 }

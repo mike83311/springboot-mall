@@ -10,6 +10,4 @@ public interface OrderService {
     Integer createOrder(Integer userId, CreateOrderRequest createOrderRequest);
 
     Order getOrderById(Integer orderId);
-
-    List<?> getAllOrders(Integer userId);
 }
