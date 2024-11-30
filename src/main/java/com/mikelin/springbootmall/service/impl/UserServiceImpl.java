@@ -1,6 +1,7 @@
 package com.mikelin.springbootmall.service.impl;
 
 import com.mikelin.springbootmall.dao.UserDao;
+import com.mikelin.springbootmall.dto.UserLoginRequest;
 import com.mikelin.springbootmall.dto.UserRegisterRequest;
 import com.mikelin.springbootmall.model.User;
 import com.mikelin.springbootmall.service.UserService;
@@ -16,6 +17,7 @@ import org.springframework.web.server.ResponseStatusException;
 public class UserServiceImpl implements UserService {
 
     private final static Logger log = LoggerFactory.getLogger(UserServiceImpl.class);
+
     @Autowired
     private UserDao userDao;
 
@@ -35,5 +37,22 @@ public class UserServiceImpl implements UserService {
     @Override
     public User getUserById(Integer id) {
         return userDao.getUserById(id);
+    }
+
+    @Override
+    public User login(UserLoginRequest userLoginRequest) {
+        User user = userDao.getUserByEmail(userLoginRequest.getEmail());
+
+        if (user == null) {
+            log.warn("the email {} does not register", userLoginRequest.getEmail());
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+        }
+
+        if (!user.getPassword().equals(userLoginRequest.getPassword())) {
+            log.warn("the password of {} does not match", userLoginRequest.getEmail());
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+        }
+
+        return user;
     }
 }
